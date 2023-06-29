@@ -19,7 +19,6 @@ function fetchBreeds() {
       if (response.status !== 200) {
         throw new Error(response.status);
       }
-      showSelectElement();
       return response.data;
     })
     .catch(error => {
@@ -46,12 +45,15 @@ function fetchCatByBreed(breedId) {
   showLoader();
   hideError();
   return axios
-    .get(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`)
+    .get(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}123`)
     .then(response => {
       if (response.status !== 200) {
         throw new Error(response.status);
       }
       return response.data;
+    })
+    .catch(error => {
+      showError();
     })
     .finally(() => {
       hideLoader();
@@ -115,7 +117,10 @@ hideLoader();
 hideError();
 
 fetchBreeds()
-  .then(breeds => renderBreedsList(breeds))
+  .then(breeds => {
+    renderBreedsList(breeds);
+    showSelectElement();
+  })
   .catch(error => console.log(error));
 
 selectElement.addEventListener('change', () => {
@@ -126,5 +131,8 @@ selectElement.addEventListener('change', () => {
       renderCatInfo(cat);
       showCatInfo();
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+      console.log(error);
+      showError();
+    });
 });
