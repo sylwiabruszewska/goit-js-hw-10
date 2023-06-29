@@ -5,6 +5,7 @@ axios.defaults.headers.common['x-api-key'] =
 
 const selectElement = document.querySelector('.breed-select');
 
+// get&render breeds list - breed select element
 function fetchBreeds() {
   return axios.get('https://api.thecatapi.com/v1/breeds').then(response => {
     if (response.status !== 200) {
@@ -23,6 +24,7 @@ function renderBreedsList(breeds) {
   selectElement.innerHTML = markup;
 }
 
+// get&render cat info - cat info container
 function fetchCatByBreed(breedId) {
   return axios
     .get('https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}')
