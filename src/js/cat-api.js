@@ -23,6 +23,17 @@ function renderBreedsList(breeds) {
   selectElement.innerHTML = markup;
 }
 
+function fetchCatByBreed(breedId) {
+  return axios
+    .get('https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}')
+    .then(response => {
+      if (response.status !== 200) {
+        throw new Error(response.status);
+      }
+      return response.data;
+    });
+}
+
 fetchBreeds()
   .then(breeds => renderBreedsList(breeds))
   .catch(error => console.log(error));
