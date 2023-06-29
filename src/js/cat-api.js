@@ -74,7 +74,7 @@ function hideError() {
 }
 
 function hideCatInfo() {
-  catInfoDiv.style.display = 'none';
+  catInfoContainer.style.display = 'none';
 }
 
 hideLoader();
