@@ -73,10 +73,23 @@ function hideError() {
   error.style.display = 'none';
 }
 
+function showCatInfo() {
+  catInfoContainer.style.display = 'block';
+}
+
 function hideCatInfo() {
   catInfoContainer.style.display = 'none';
 }
 
+function showSelectElement() {
+  selectElement.classList.remove('hidden');
+}
+
+function showSelectElement() {
+  selectElement.classList.add('hidden');
+}
+
+hideCatInfo();
 hideLoader();
 hideError();
 
