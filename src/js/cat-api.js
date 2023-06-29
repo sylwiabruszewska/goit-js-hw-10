@@ -48,10 +48,10 @@ function renderCatInfo(cat) {
   const catTemperament = cat[0].breeds[0].temperament;
 
   const catMarkup = `
-    <img src="${catImage}" alt="${catName} image">
-    <h2>${catName}</h2>
-    <p>${catDescription}</p>
-    <p>${catTemperament}</p>
+    <img class ="card__image" src="${catImage}" alt="${catName} image">
+    <h2 class="card__name">${catName}</h2>
+    <p class="card__content">${catDescription}</p>
+    <p class="card__text">${catTemperament}</p>
   `;
   catInfoContainer.innerHTML = catMarkup;
 }
