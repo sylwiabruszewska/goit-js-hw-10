@@ -14,20 +14,20 @@ function fetchBreeds() {
   hideSelectElement();
   hideError();
   return axios
-    .get('https://api.thecatapi.com/v1/breeds123')
+    .get('https://api.thecatapi.com/v1/breeds')
     .then(response => {
       if (response.status !== 200) {
-        hideSelectElement();
         throw new Error(response.status);
       }
+      showSelectElement();
       return response.data;
     })
     .catch(error => {
+      hideSelectElement();
       showError();
     })
     .finally(() => {
       hideLoader();
-      // showSelectElement();
     });
 }
 
@@ -115,10 +115,7 @@ hideLoader();
 hideError();
 
 fetchBreeds()
-  .then(breeds => {
-    showSelectElement();
-    renderBreedsList(breeds);
-  })
+  .then(breeds => renderBreedsList(breeds))
   .catch(error => console.log(error));
 
 selectElement.addEventListener('change', () => {
