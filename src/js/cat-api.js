@@ -12,17 +12,22 @@ const error = document.querySelector('.error');
 function fetchBreeds() {
   showLoader();
   hideSelectElement();
+  hideError();
   return axios
-    .get('https://api.thecatapi.com/v1/breeds')
+    .get('https://api.thecatapi.com/v1/breeds123')
     .then(response => {
       if (response.status !== 200) {
+        hideSelectElement();
         throw new Error(response.status);
       }
       return response.data;
     })
+    .catch(error => {
+      showError();
+    })
     .finally(() => {
       hideLoader();
-      showSelectElement();
+      // showSelectElement();
     });
 }
 
@@ -39,8 +44,9 @@ function renderBreedsList(breeds) {
 function fetchCatByBreed(breedId) {
   hideCatInfo();
   showLoader();
+  hideError();
   return axios
-    .get(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}123`)
+    .get(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`)
     .then(response => {
       if (response.status !== 200) {
         throw new Error(response.status);
@@ -109,7 +115,10 @@ hideLoader();
 hideError();
 
 fetchBreeds()
-  .then(breeds => renderBreedsList(breeds))
+  .then(breeds => {
+    showSelectElement();
+    renderBreedsList(breeds);
+  })
   .catch(error => console.log(error));
 
 selectElement.addEventListener('change', () => {
