@@ -37,13 +37,18 @@ function renderBreedsList(breeds) {
 
 // get&render cat info - cat info container
 function fetchCatByBreed(breedId) {
+  hideCatInfo();
+  showLoader();
   return axios
-    .get(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`)
+    .get(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}123`)
     .then(response => {
       if (response.status !== 200) {
         throw new Error(response.status);
       }
       return response.data;
+    })
+    .finally(() => {
+      hideLoader();
     });
 }
 
