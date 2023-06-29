@@ -41,7 +41,16 @@ function renderCatInfo(cat) {
   console.log(cat);
   console.log(cat[0]);
   const catImage = cat[0].url;
-  const catMarkup = `<img src="${catImage}">`;
+  const catName = cat[0].breeds[0].name;
+  const catDescription = cat[0].breeds[0].description;
+  const catTemperament = cat[0].breeds[0].temperament;
+
+  const catMarkup = `
+    <img src="${catImage}" alt="${catName} image">
+    <h2>${catName}</h2>
+    <p>${catDescription}</p>
+    <p>${catTemperament}</p>
+  `;
   catInfoContainer.innerHTML = catMarkup;
 }
 
