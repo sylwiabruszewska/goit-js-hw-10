@@ -1,2 +1,4 @@
-@import './common';
-@import './example';
+@import './base/common';
+@import './utils/vars';
+@import './base/global';
+@import './components/card';
