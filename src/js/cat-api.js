@@ -10,12 +10,20 @@ const error = document.querySelector('.error');
 
 // get&render breeds list - breed select element
 function fetchBreeds() {
-  return axios.get('https://api.thecatapi.com/v1/breeds').then(response => {
-    if (response.status !== 200) {
-      throw new Error(response.status);
-    }
-    return response.data;
-  });
+  showLoader();
+  hideSelectElement();
+  return axios
+    .get('https://api.thecatapi.com/v1/breeds')
+    .then(response => {
+      if (response.status !== 200) {
+        throw new Error(response.status);
+      }
+      return response.data;
+    })
+    .finally(() => {
+      hideLoader();
+      showSelectElement();
+    });
 }
 
 function renderBreedsList(breeds) {
@@ -76,7 +84,7 @@ function hideError() {
 }
 
 function showCatInfo() {
-  catInfoContainer.style.display = 'block';
+  catInfoContainer.style.display = 'flex';
 }
 
 function hideCatInfo() {
@@ -87,7 +95,7 @@ function showSelectElement() {
   selectElement.classList.remove('hidden');
 }
 
-function showSelectElement() {
+function hideSelectElement() {
   selectElement.classList.add('hidden');
 }
 
@@ -103,6 +111,9 @@ selectElement.addEventListener('change', () => {
   const selectedBreedId = selectElement.value;
   console.log(selectedBreedId);
   fetchCatByBreed(selectedBreedId)
-    .then(cat => renderCatInfo(cat))
+    .then(cat => {
+      renderCatInfo(cat);
+      showCatInfo();
+    })
     .catch(error => console.log(error));
 });
