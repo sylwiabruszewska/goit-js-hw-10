@@ -5,6 +5,8 @@ axios.defaults.headers.common['x-api-key'] =
 
 const selectElement = document.querySelector('.breed-select');
 const catInfoContainer = document.querySelector('.cat-info');
+const loader = document.querySelector('.loader');
+const error = document.querySelector('.error');
 
 // get&render breeds list - breed select element
 function fetchBreeds() {
@@ -53,6 +55,30 @@ function renderCatInfo(cat) {
   `;
   catInfoContainer.innerHTML = catMarkup;
 }
+
+// hide & show block functions
+function showLoader() {
+  loader.style.display = 'block';
+}
+
+function hideLoader() {
+  loader.style.display = 'none';
+}
+
+function showError() {
+  error.style.display = 'block';
+}
+
+function hideError() {
+  error.style.display = 'none';
+}
+
+function hideCatInfo() {
+  catInfoDiv.style.display = 'none';
+}
+
+hideLoader();
+hideError();
 
 fetchBreeds()
   .then(breeds => renderBreedsList(breeds))
