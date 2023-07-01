@@ -1,5 +1,7 @@
 import axios from 'axios';
 import Notiflix from 'notiflix';
+import SlimSelect from 'slim-select';
+import 'slim-select/dist/slimselect.css';
 
 axios.defaults.headers.common['x-api-key'] =
   'live_wZofELtVaZfNtzv7yqgfLPJK0OZHU8Vzv5kai2x0xmNZwu570obG96ufNTp3XSot';
@@ -35,12 +37,16 @@ function fetchBreeds() {
 }
 
 function renderBreedsList(breeds) {
-  const markup = breeds
-    .map(breed => {
-      return `<option value="${breed.id}">${breed.name}</option>`;
-    })
-    .join('');
-  selectElement.innerHTML = markup;
+  const options = breeds.map(breed => {
+    return {
+      text: breed.name,
+      value: breed.id,
+    };
+  });
+  new SlimSelect({
+    select: '.breed-select',
+    data: options,
+  });
 }
 
 // get&render cat info - cat info container
@@ -49,7 +55,7 @@ function fetchCatByBreed(breedId) {
   showLoader();
   // hideError();
   return axios
-    .get(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}123`)
+    .get(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`)
     .then(response => {
       if (response.status !== 200) {
         throw new Error(response.status);
@@ -130,6 +136,7 @@ fetchBreeds()
 selectElement.addEventListener('change', () => {
   const selectedBreedId = selectElement.value;
   console.log(selectedBreedId);
+
   fetchCatByBreed(selectedBreedId)
     .then(cat => {
       renderCatInfo(cat);
