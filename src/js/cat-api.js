@@ -37,20 +37,28 @@ function fetchBreeds() {
 }
 
 function renderBreedsList(breeds) {
-  const options = [
-    { text: 'Select breed', value: '' },
-    ...breeds.map(breed => {
-      return {
-        text: breed.name,
-        value: breed.id,
-      };
-    }),
-  ];
+  const options = breeds.map(breed => {
+    return {
+      text: breed.name,
+      value: breed.id,
+    };
+  });
+
+  options.unshift({
+    text: 'Select breed',
+    value: '',
+    'data-placeholder': true,
+  });
 
   new SlimSelect({
     select: '.breed-select',
     data: options,
+    settings: {
+      showSearch: false,
+    },
   });
+
+  addStyles();
 }
 
 // get&render cat info - cat info container
@@ -124,6 +132,10 @@ function showSelectElement() {
 
 function hideSelectElement() {
   selectElement.classList.add('hidden');
+}
+
+function addStyles() {
+  selectElement.classList.add('slim-select');
 }
 
 hideCatInfo();
