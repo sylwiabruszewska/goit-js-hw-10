@@ -93,8 +93,6 @@ function fetchCatByBreed(breedId) {
 }
 
 function renderCatInfo(cat) {
-  console.log(cat);
-  console.log(cat[0]);
   const catImage = cat[0].url;
   const catName = cat[0].breeds[0].name;
   const catDescription = cat[0].breeds[0].description;
@@ -113,7 +111,6 @@ function renderCatInfo(cat) {
 
 selectElement.addEventListener('change', () => {
   const selectedBreedId = selectElement.value;
-  console.log(selectedBreedId);
   if (selectedBreedId !== '') {
     showElement(loader);
     hideElement(catInfoContainer);
