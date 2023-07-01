@@ -37,12 +37,16 @@ function fetchBreeds() {
 }
 
 function renderBreedsList(breeds) {
-  const options = breeds.map(breed => {
-    return {
-      text: breed.name,
-      value: breed.id,
-    };
-  });
+  const options = [
+    { text: 'Select breed', value: '' },
+    ...breeds.map(breed => {
+      return {
+        text: breed.name,
+        value: breed.id,
+      };
+    }),
+  ];
+
   new SlimSelect({
     select: '.breed-select',
     data: options,
@@ -136,17 +140,18 @@ fetchBreeds()
 selectElement.addEventListener('change', () => {
   const selectedBreedId = selectElement.value;
   console.log(selectedBreedId);
-
-  fetchCatByBreed(selectedBreedId)
-    .then(cat => {
-      renderCatInfo(cat);
-      showCatInfo();
-    })
-    .catch(error => {
-      console.log(error);
-      Notiflix.Notify.failure(
-        'Oops! Something went wrong! Try reloading the page!'
-      );
-      // showError();
-    });
+  if (selectedBreedId !== '') {
+    fetchCatByBreed(selectedBreedId)
+      .then(cat => {
+        renderCatInfo(cat);
+        showCatInfo();
+      })
+      .catch(error => {
+        console.log(error);
+        Notiflix.Notify.failure(
+          'Oops! Something went wrong! Try reloading the page!'
+        );
+        // showError();
+      });
+  }
 });
