@@ -1,7 +1,9 @@
 body {
   background-color: $bgColor;
+  font-family: $fontFamily;
 }
 
+h1,
 h2,
 p {
   margin: 0;
@@ -18,6 +20,9 @@ p {
 
 .bold {
   font-weight: bold;
+  font-family: $fontHeading;
+  font-weight: 400;
+  font-size: 20px;
 }
 
 // .error {

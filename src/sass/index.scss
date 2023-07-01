@@ -1,6 +1,8 @@
 @import './base/common';
+@import './base/mq.scss';
 @import './utils/vars';
 @import './base/global';
+@import './components/heading';
 @import './components/card';
 @import './components/loader';
 @import './components/select';
