@@ -2,11 +2,9 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  // width: 50%;
   padding: 20px;
   background-color: #fff;
   border-radius: $borderRadius;
-  margin: 10px;
   box-shadow: $boxShadow;
 
   @include mq(tablet) {
@@ -41,7 +39,7 @@
   }
 
   &__text {
-    border: $primaryColor 3px dashed;
+    border: $primaryColor 2px dashed;
     border-radius: $borderRadius;
     padding: 5px;
   }

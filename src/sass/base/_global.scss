@@ -1,11 +1,11 @@
 body {
   background-color: $bgColor;
   font-family: $fontFamily;
+  margin: 10px;
 }
 
 h1,
-h2,
-p {
+h2 {
   margin: 0;
 }
 
@@ -14,8 +14,6 @@ p {
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
-  //   width: 0;
-  //   height: 0;
 }
 
 .bold {
@@ -24,7 +22,3 @@ p {
   font-weight: 400;
   font-size: 20px;
 }
-
-// .error {
-//   color: red;
-// }

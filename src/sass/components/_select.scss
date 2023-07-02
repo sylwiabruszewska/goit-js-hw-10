@@ -1,4 +1,8 @@
 .slim-select {
-  max-width: 50%;
-  margin: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+
+  @include mq(desktop) {
+    max-width: 50%;
+  }
 }
